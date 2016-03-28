@@ -16,10 +16,9 @@
 int main (int argc, char* args[]) {
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
     Game game;
+    game.init();
 
     game.scenes.insert(game.scenes.begin(), new OverWorld());
-
-    game.init();
 
     SDL_Event e;
     float delta;
@@ -35,8 +34,8 @@ int main (int argc, char* args[]) {
             }
         }
 
-        game.render(delta);
-        game.update(delta);
+        game.tick(delta);
+        game.draw(delta);
 
         SDL_GL_SwapWindow(display);
         SDL_Delay(1);

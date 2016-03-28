@@ -114,7 +114,7 @@ class Game {
         /**
          * Tick/Update function.
          */
-        void update (float delta) {
+        void tick (float delta) {
             Scene *scene;
             for (sceneIterator = scenes.begin() ; sceneIterator != scenes.end(); sceneIterator++) {
                 scene = &**sceneIterator;
@@ -130,15 +130,15 @@ class Game {
 
 
         /**
-         * This function is used to draw a rotating green plane.
+         * This function is used to draw.
          */
-        void render (float delta) {
+        void draw (float delta) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             
             Scene *scene;
             for (sceneIterator = scenes.begin() ; sceneIterator != scenes.end(); sceneIterator++) {
                 scene = &**sceneIterator;
-                scene->tick(delta);
+                scene->draw(delta);
             }
         }
 
