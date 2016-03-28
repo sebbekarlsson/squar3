@@ -6,10 +6,13 @@
 using namespace std;
 class Entity: public Instance {
     public:
+        float dx, dy;
+
         Entity (float x, float y) : Instance(x, y) {
+            this->dx = 0;
+            this->dy = 0;
             this->type = "entity";
         }
-
 
         void updatePhysics (float delta) {
             if(dx > 0){
@@ -45,5 +48,10 @@ class Entity: public Instance {
             x += dx * delta;
             y += dy * delta;
         }
-
+        
+        void addForce (float direction, float force) {
+            float radians = direction * M_PI / 180.0; 
+            dx += (float) (cos(radians) * force);
+            dy += (float) (sin(radians) * force);
+        }
 };

@@ -1,1 +1,1 @@
-class block : public Entity {};
+class block : public Instance {};
