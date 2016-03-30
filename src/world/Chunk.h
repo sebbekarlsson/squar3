@@ -2,7 +2,7 @@ class Chunk {
     public:
         float x;
         float y;
-       // Block* blocks[15][15];
+        Block* blocks[16][16];
         bool initialized;
 
         Chunk(float x, float y) {
@@ -10,16 +10,24 @@ class Chunk {
             this->y = y;
             this->initialized = false;
             
-            //for (unsigned int xx = 0; xx < sizeof(this->blocks); xx++) {
-            //    for(unsigned int yy = 0; yy < sizeof(this->blocks[xx]); yy++) {
-            //        this->blocks[xx][yy] = new Block(xx*16, yy*16);
-            //    }
-           // }
+            for (int xx = 0; xx < sizeof(blocks)/sizeof(*blocks); xx++) {
+                for(int yy = 0; yy < sizeof(blocks[xx])/sizeof(*blocks[xx]); yy++) {
+                    blocks[xx][yy] = new Block(x+(xx*16), y+(yy*16));
+                }
+            }
+        }
+
+        void drawBlocks(float delta) {
+            for (int xx = 0; xx < sizeof(blocks)/sizeof(*blocks); xx++) {
+                for(int yy = 0; yy < sizeof(blocks[xx])/sizeof(*blocks[xx]); yy++) {
+                    blocks[xx][yy]->draw(delta);
+                }
+            }
         }
 
         void tick(float delta) {}
         void draw(float delta) {
-            //cout << x << endl;
+            drawBlocks(delta);
         }
         void initialize(float delta) {}
 };

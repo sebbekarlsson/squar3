@@ -6,7 +6,7 @@
 using namespace std;
 class World: public Scene {
     public:
-        Chunk** chunks[1][1];
+        Chunk* chunks[4][4];
 
 
         World () : Scene () {
@@ -15,9 +15,9 @@ class World: public Scene {
              * Some sort of memory problem:
              * "Invalid write of size 8"
             */
-            for (int xx = 0; xx < sizeof(this->chunks)-1; xx++) {
-                for(int yy = 0; yy < sizeof(this->chunks[xx])-1; yy++) {
-                    this->chunks[xx][yy] = new Chunk(0.1f , 0.1f);
+            for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
+                for(int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                    chunks[xx][yy] = new Chunk(xx*16*16 , yy*16*16);
                 }
             }
         }
@@ -27,11 +27,11 @@ class World: public Scene {
          * This function is used to draw all chunks.in this scene.
          */
         void drawChunks(float delta) {
-            //for (int xx = 0; xx < sizeof(this->chunks); xx++) {
-            //    for(int yy = 0; yy < sizeof(this->chunks[xx]); yy++) {
-            //        this->chunks[xx][yy]->draw(delta);
-            //    }
-            //}
+            for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
+                for(int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                    chunks[xx][yy]->draw(delta);
+                }
+            }
         }
 
 
@@ -39,10 +39,10 @@ class World: public Scene {
          * This function is used to tick all chunks.in this scene.
          */
         void tickChunks(float delta) {
-            //for (int xx = 0; xx < sizeof(this->chunks); xx++) {
-            //    for(int yy = 0; yy < sizeof(this->chunks[xx]); yy++) {
-            //        this->chunks[xx][yy]->draw(delta);
-            //    }
-            // }
+            for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
+                for(int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                    chunks[xx][yy]->tick(delta);
+                }
+            }
         }
 };

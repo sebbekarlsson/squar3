@@ -4,7 +4,6 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 
-
 class EasyImage {
     
     SDL_Surface * surface;
@@ -16,9 +15,9 @@ class EasyImage {
             this->surface = surface;
             this->TextureID = 0;
 
-            //if(this->surface->format->BytesPerPixel == 4) {
+            if(this->surface->format->BytesPerPixel == 4) {
                 this->mode = GL_RGBA;
-            //}
+            }
         }
 
         SDL_Texture * get_image() {
