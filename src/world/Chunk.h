@@ -12,7 +12,7 @@ class Chunk {
             
             for (int xx = 0; xx < sizeof(blocks)/sizeof(*blocks); xx++) {
                 for(int yy = 0; yy < sizeof(blocks[xx])/sizeof(*blocks[xx]); yy++) {
-                    blocks[xx][yy] = new Block(x+(xx*16), y+(yy*16));
+                    blocks[xx][yy] = new Block(x+(xx*16), y+(yy*16), BLOCK_DIRT);
                 }
             }
         }

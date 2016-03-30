@@ -1,12 +1,19 @@
 class Block : public Instance {
     public:
         EasyImage * image;
+        BlockType * type;
 
-        Block (float x, float y) : Instance(x, y) {
+        Block (float x, float y, BlockType type) : Instance(x, y) {
             this->h = 16;
             this->w = 16;
-            SDLImageLoader loader = SDLImageLoader();
-            this->image = loader.load("src/res/dirt.png");
+            setType(type);
+        }
+        
+        void setType(BlockType type) {
+            this->type = &type;
+
+            SDLImageLoader IMGLoader = SDLImageLoader();
+            this->image = IMGLoader.load(type.texture_path);
         }
 
         void tick(float delta) {}

@@ -1,3 +1,4 @@
+#include "types/BlockType.h"
 #include "Scene.h"
 #include "instance/Block.h"
 #include "world/Chunk.h"
