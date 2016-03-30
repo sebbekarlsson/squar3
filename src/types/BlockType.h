@@ -5,6 +5,8 @@ class BlockType {
         BlockType (const char * texture_path) {
             this->texture_path = texture_path;
         }
-}
+};
 
-BLOCK_DIRT = BlockType("src/res/dirt.png");
+BlockType BLOCK_GRASS = BlockType("src/res/grass.png");
+BlockType BLOCK_DIRT = BlockType("src/res/dirt.png");
+BlockType BLOCK_COBBLE = BlockType("src/res/cobble.png");
