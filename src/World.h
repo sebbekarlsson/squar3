@@ -1,6 +1,7 @@
 #include "types/BlockType.h"
 #include "Scene.h"
 #include "instance/Block.h"
+#include "world/WorldMap.h"
 #include "world/Chunk.h"
 
 
@@ -8,17 +9,15 @@ using namespace std;
 class World: public Scene {
     public:
         Chunk* chunks[4][4];
+        WorldMap * map;
 
 
         World () : Scene () {
-            /* Does not work... Will take a look at it tomorrow...
-             *
-             * Some sort of memory problem:
-             * "Invalid write of size 8"
-            */
+            this->map = new WorldMap(4*16);
+            this->map->generate();
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
-                for(int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
-                    chunks[xx][yy] = new Chunk(xx*16*16 , yy*16*16);
+                for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                    chunks[xx][yy] = new Chunk((xx*(16*16)) , (yy*(16*16)), this->map);
                 }
             }
         }
@@ -29,7 +28,7 @@ class World: public Scene {
          */
         void drawChunks(float delta) {
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
-                for(int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
                     chunks[xx][yy]->draw(delta);
                 }
             }
@@ -41,7 +40,7 @@ class World: public Scene {
          */
         void tickChunks(float delta) {
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
-                for(int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
                     chunks[xx][yy]->tick(delta);
                 }
             }
