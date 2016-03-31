@@ -6,7 +6,6 @@ class OverWorld: public World {
         void tick(float delta) {
             tickInstances(delta);
             tickChunks(delta);
-
         }
 
         void draw(float delta) {

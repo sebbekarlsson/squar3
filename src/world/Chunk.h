@@ -39,7 +39,18 @@ class Chunk {
             }
         }
 
-        void tick(float delta) {}
+
+        void tickBlocks(float delta) {
+            for (int xx = 0; xx < sizeof(blocks)/sizeof(*blocks); xx++) {
+                for(int yy = 0; yy < sizeof(blocks[xx])/sizeof(*blocks[xx]); yy++) {
+                    blocks[xx][yy]->tick(delta);
+                }
+            }
+        }
+
+        void tick(float delta) {
+            tickBlocks(delta);
+        }
         void draw(float delta) {
             drawBlocks(delta);
             glDisable(GL_TEXTURE_2D);

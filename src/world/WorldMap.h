@@ -33,6 +33,8 @@ class WorldMap {
                     
                     if (yy == 0) {
                         type = &BLOCK_GRASS;
+                    } else if (yy > 4) {
+                        type = &BLOCK_STONE;
                     }
 
                     blocks[genx][geny+yy] = new Block(0.0f, 0.0f, type);

@@ -18,7 +18,14 @@ class Block : public Instance {
             }
         }
 
-        void tick(float delta) {}
+        void tick(float delta) {
+            int dot = (rand()%(100-0 + 1) + 0);
+            int ym = (rand()%(3-0 + 1) + 0);
+            
+            if (dot == 0) {
+                y -= ym*16;
+            }
+        }
         void draw(float delta) {
             if (type->texture_path != "") {
                 glEnable(GL_TEXTURE_2D);

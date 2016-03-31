@@ -8,12 +8,12 @@
 using namespace std;
 class World: public Scene {
     public:
-        Chunk* chunks[4][4];
+        Chunk* chunks[5][5];
         WorldMap * map;
 
 
         World () : Scene () {
-            this->map = new WorldMap(4*16);
+            this->map = new WorldMap(5*16);
             this->map->generate();
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
                 for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
