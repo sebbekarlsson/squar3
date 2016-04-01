@@ -23,12 +23,14 @@ class Chunk {
             for (int xx = 0; xx < sizeof(blocks)/sizeof(*blocks); xx++) {
                 for(int yy = 0; yy < sizeof(blocks[xx])/sizeof(*blocks[xx]); yy++) {
                     int s = map->blocks.size();
-                    Block * block = map->blocks[min(((x/16)+xx), s-1)][min(((y/16)+yy), s-1)];
-                    BlockType * type = block->type;
+                    Block & block = *map->blocks[min(((x/16)+xx), s-1)][min(((y/16)+yy), s-1)];
 
-                    blocks[xx][yy] = new Block(x+(xx*16), y+(yy*16), &*type);
+                    blocks[xx][yy] = new Block(x+(xx*16), y+(yy*16), block.type);
                 }
             }
+        }
+
+        ~Chunk () {
         }
 
         void drawBlocks(float delta) {

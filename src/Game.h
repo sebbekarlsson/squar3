@@ -3,7 +3,7 @@
 
 const int WIDTH = 640;
 const int HEIGHT = WIDTH / 16 * 9;
-const int SCALE = 2;
+const int SCALE = 3;
 
 SDL_Window* display = NULL;
 class Game {
@@ -34,12 +34,12 @@ class Game {
             glClearColor(0, 0, 0, 0);
             glClearDepth(1.0f);
 
-            glViewport(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
+            glViewport(0, 0, (WIDTH * SCALE), (HEIGHT * SCALE));
 
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
-            glOrtho(0, WIDTH * SCALE, HEIGHT * SCALE, 0, 1, -1);
+            glOrtho(0, (WIDTH * SCALE)*2, (HEIGHT * SCALE)*2, 0, 1, -1);
 
             glMatrixMode(GL_MODELVIEW);
 

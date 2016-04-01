@@ -4,31 +4,37 @@
 using namespace std;
 class WorldMap {
     public:
-        int size;
+        int w;
+        int h;
         std::vector< std::vector<Block*> > blocks;
 
-        WorldMap (int size) {
-            this->size = size;
+        WorldMap (int w, int h) {
+            this->w = w;
+            this->h = h;
 
-            blocks.resize(size);
-            for (int xx = 0; xx < size; xx++) {
-                for(int yy = 0; yy < size; yy++) {
+            blocks.resize(w);
+            for (int xx = 0; xx < w; xx++) {
+                for(int yy = 0; yy < h; yy++) {
                     blocks[xx].push_back(new Block(xx*16, yy*16, &BLOCK_AIR));
                 }
             }
+        }
+
+        ~WorldMap () {
+            cout << "worldmap del" << endl;
         }
 
         void generate () {
             srand(time(NULL));
 
             int genx = 0;
-            int geny = (size/2)-16;
+            int geny = (h/2);
 
-            while (genx < size) {
+            while (genx < w) {
                 BlockType * type = &BLOCK_COBBLE;
                 blocks[genx][geny] = new Block(0.0f, 0.0f, type); 
                 
-                for (int yy = 0; yy < size-geny; yy+=1) {
+                for (int yy = 0; yy < h-geny; yy+=1) {
                     type = &BLOCK_DIRT;
                     
                     if (yy == 0) {
