@@ -1,14 +1,16 @@
 class BlockType {
     public:
-        const char * texture_path;
+        EasyImage * image;
 
-        BlockType (const char * texture_path) {
-            this->texture_path = texture_path;
+        BlockType (EasyImage * image) {
+            this->image = image;
         }
 };
 
-BlockType BLOCK_GRASS = BlockType("src/res/grass.png");
-BlockType BLOCK_DIRT = BlockType("src/res/dirt.png");
-BlockType BLOCK_COBBLE = BlockType("src/res/cobble.png");
-BlockType BLOCK_STONE = BlockType("src/res/stone.png");
-BlockType BLOCK_AIR = BlockType("");
+SDLImageLoader IMGLoader = SDLImageLoader();
+
+BlockType BLOCK_GRASS = BlockType(IMGLoader.load("src/res/grass.png"));
+BlockType BLOCK_DIRT = BlockType(IMGLoader.load("src/res/dirt.png"));
+BlockType BLOCK_COBBLE = BlockType(IMGLoader.load("src/res/cobble.png"));
+BlockType BLOCK_STONE = BlockType(IMGLoader.load("src/res/stone.png"));
+BlockType BLOCK_AIR = BlockType(NULL);

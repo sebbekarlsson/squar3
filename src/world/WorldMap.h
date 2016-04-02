@@ -25,6 +25,12 @@ class WorldMap {
         }
 
         void generate () {
+            for (int xx = 0; xx < w; xx++) {
+                for(int yy = 0; yy < h; yy++) {
+                    blocks[xx][yy]->setType(&BLOCK_AIR);
+                }
+            }
+            
             srand(time(NULL));
 
             int genx = 0;
@@ -32,7 +38,6 @@ class WorldMap {
 
             while (genx < w) {
                 BlockType * type = &BLOCK_COBBLE;
-                blocks[genx][geny] = new Block(0.0f, 0.0f, type); 
                 
                 for (int yy = 0; yy < h-geny; yy+=1) {
                     type = &BLOCK_DIRT;
@@ -43,15 +48,13 @@ class WorldMap {
                         type = &BLOCK_STONE;
                     }
 
-                    blocks[genx][geny+yy] = new Block(0.0f, 0.0f, type);
+                    blocks[genx][geny+yy]->setType(type);
                 }
                 
                 int minus = rand()%(1-(-1) + 1) + -1;
                 int ym = (rand()%(3-0 + 1) + 0) * minus;
                 genx += 1;
                 geny += ym;
-
-                
             }
         } 
 };
