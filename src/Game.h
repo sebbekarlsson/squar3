@@ -11,14 +11,15 @@ class Game {
 
         bool quit;
         SDL_GLContext context;
-        std::list<Scene*> scenes;
-        std::list<Scene*>::iterator sceneIterator;
+        std::vector<Scene*> scenes;
+        int sceneIndex;
 
 
         /**
          * Constructor
          */
         Game () {
+            this->sceneIndex = 0;
             this->quit = false;
         }
 
@@ -39,7 +40,7 @@ class Game {
             glMatrixMode(GL_PROJECTION);
             glLoadIdentity();
 
-            glOrtho(0, (WIDTH * SCALE)*2, (HEIGHT * SCALE)*2, 0, 1, -1);
+            glOrtho(0, (WIDTH * SCALE), (HEIGHT * SCALE), 0, 1, -1);
 
             glMatrixMode(GL_MODELVIEW);
 
@@ -115,17 +116,13 @@ class Game {
          * Tick/Update function.
          */
         void tick (float delta) {
-            Scene *scene;
-            for (sceneIterator = scenes.begin() ; sceneIterator != scenes.end(); sceneIterator++) {
-                scene = &**sceneIterator;
-
-                if (scene->initialized == false) {
-                    scene->initialize(delta);
-                    scene->initialized = true;
-                }
-
-                scene->tick(delta);
+            Scene * scene = getCurrentScene();
+            if (scene->initialized == false) {
+                scene->initialize(delta);
+                scene->initialized = true;
             }
+
+            scene->tick(delta);
         }
 
 
@@ -133,13 +130,19 @@ class Game {
          * This function is used to draw.
          */
         void draw (float delta) {
+            Scene * scene = getCurrentScene();
+
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            
-            Scene *scene;
-            for (sceneIterator = scenes.begin() ; sceneIterator != scenes.end(); sceneIterator++) {
-                scene = &**sceneIterator;
-                scene->draw(delta);
-            }
+
+            glPushMatrix();
+            glTranslatef(-scene->camera->x, -scene->camera->y, 0.0f);
+            scene->draw(delta); 
+            glPopMatrix();
+        }
+
+
+        Scene* getCurrentScene() {
+            return scenes[sceneIndex];
         }
 
 

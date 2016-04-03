@@ -8,12 +8,11 @@
 using namespace std;
 class World: public Scene {
     public:
-        Chunk* chunks[15][8];
+        Chunk* chunks[100][8];
         WorldMap * map;
 
-
         World () : Scene () {
-            this->map = new WorldMap(15*16, 8*16);
+            this->map = new WorldMap(100*16, 8*16);
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
                 for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
                     delete chunks[xx][yy];
@@ -22,7 +21,7 @@ class World: public Scene {
             }
             generate();
         }
-        
+
 
         void generate() {
             this->map->generate();
@@ -39,7 +38,15 @@ class World: public Scene {
         void drawChunks(float delta) {
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
                 for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                    if (!(
+                                chunks[xx][yy]->x >= camera->x &&
+                                chunks[xx][yy]->x+chunks[xx][yy]->w <= camera->x+(WIDTH*SCALE) &&
+                                chunks[xx][yy]->y >= camera->y &&
+                                chunks[xx][yy]->y+chunks[xx][yy]->h <= camera->y+(HEIGHT*SCALE) 
+                         )
+                       ) { continue; }
                     chunks[xx][yy]->draw(delta);
+
                 }
             }
         }
@@ -51,6 +58,13 @@ class World: public Scene {
         void tickChunks(float delta) {
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
                 for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
+                    if (!(
+                                chunks[xx][yy]->x >= camera->x &&
+                                chunks[xx][yy]->x+chunks[xx][yy]->w <= camera->x+(WIDTH*SCALE) &&
+                                chunks[xx][yy]->y >= camera->y &&
+                                chunks[xx][yy]->y+chunks[xx][yy]->h <= camera->y+(HEIGHT*SCALE) 
+                         )
+                       ) { continue; }
                     chunks[xx][yy]->tick(delta);
                 }
             }

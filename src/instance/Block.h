@@ -6,8 +6,6 @@ class Block : public Instance {
             this->h = 16;
             this->w = 16;
             setType(type);
-
-            cout << "block create" << endl;
         }
 
         ~Block () {

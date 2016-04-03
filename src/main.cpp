@@ -12,9 +12,9 @@
 #include "Entity.h"
 #include "world/OverWorld.h"
 
-
+const Uint8 *keys;
 int main (int argc, char* args[]) {
-    const Uint8 *keys = SDL_GetKeyboardState(NULL);
+    keys = SDL_GetKeyboardState(NULL);
     Game game;
     game.init();
 
