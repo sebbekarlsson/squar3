@@ -56,7 +56,7 @@ class WorldMap {
 
                 if (biomeIndex == 0) {
                     if (plantChance == 0) {
-                        blocks[genx][min(h-1, geny-1)]->setType(&BLOCK_MUSHROOM);
+                        blocks[min(w, genx)][min(h-1, geny-1)]->setType(&BLOCK_MUSHROOM);
                     }
                 }
 
@@ -73,13 +73,16 @@ class WorldMap {
                         type = &BLOCK_STONE;
                     }
 
-                    blocks[genx][geny+yy]->setType(type);
+                    blocks[min(w, genx)][max(0, geny+yy)]->setType(type);
                 }
 
                 int minus = rand()%(1-(-1) + 1) + -1;
                 int ym = (rand()%(3-0 + 1) + 0) * minus;
                 genx += 1;
                 geny += ym;
+
+                if (geny < 0) { geny = 0; }
+                if (geny > h) { geny = h-1; }
             }
         } 
 };
