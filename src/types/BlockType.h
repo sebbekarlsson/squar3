@@ -15,4 +15,6 @@ BlockType BLOCK_COBBLE = BlockType(IMGLoader.load("src/res/cobble.png"));
 BlockType BLOCK_STONE = BlockType(IMGLoader.load("src/res/stone.png"));
 BlockType BLOCK_SAND = BlockType(IMGLoader.load("src/res/sand.png"));
 BlockType BLOCK_MUSHROOM = BlockType(IMGLoader.load("src/res/mushroom.png"));
+BlockType BLOCK_LOG = BlockType(IMGLoader.load("src/res/log.png"));
+BlockType BLOCK_LEAF = BlockType(IMGLoader.load("src/res/leaf.png"));
 BlockType BLOCK_AIR = BlockType(NULL);
