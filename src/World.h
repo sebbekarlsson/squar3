@@ -39,10 +39,10 @@ class World: public Scene {
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
                 for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
                     if (!(
-                                chunks[xx][yy]->x >= camera->x &&
-                                chunks[xx][yy]->x+chunks[xx][yy]->w <= camera->x+(WIDTH*SCALE) &&
-                                chunks[xx][yy]->y >= camera->y &&
-                                chunks[xx][yy]->y+chunks[xx][yy]->h <= camera->y+(HEIGHT*SCALE) 
+                                chunks[xx][yy]->x >= camera->x+(12*12) &&
+                                chunks[xx][yy]->x+chunks[xx][yy]->w <= camera->x+((WIDTH*SCALE)-(12*12)) &&
+                                chunks[xx][yy]->y >= camera->y+(12*12) &&
+                                chunks[xx][yy]->y+chunks[xx][yy]->h <= camera->y+((HEIGHT*SCALE)-12*12) 
                          )
                        ) { continue; }
                     chunks[xx][yy]->draw(delta);
@@ -59,10 +59,10 @@ class World: public Scene {
             for (int xx = 0; xx < sizeof(chunks)/(sizeof(*chunks)); xx++) {
                 for (int yy = 0; yy < sizeof(chunks[xx])/sizeof(*chunks[xx]); yy++) {
                     if (!(
-                                chunks[xx][yy]->x >= camera->x &&
-                                chunks[xx][yy]->x+chunks[xx][yy]->w <= camera->x+(WIDTH*SCALE) &&
-                                chunks[xx][yy]->y >= camera->y &&
-                                chunks[xx][yy]->y+chunks[xx][yy]->h <= camera->y+(HEIGHT*SCALE) 
+                                chunks[xx][yy]->x >= camera->x+(12*12) &&
+                                chunks[xx][yy]->x+chunks[xx][yy]->w <= camera->x+((WIDTH*SCALE)-(12*12)) &&
+                                chunks[xx][yy]->y >= camera->y+(12*12) &&
+                                chunks[xx][yy]->y+chunks[xx][yy]->h <= camera->y+((HEIGHT*SCALE)-12*12) 
                          )
                        ) { continue; }
                     chunks[xx][yy]->tick(delta);

@@ -6,17 +6,18 @@ class OverWorld: public World {
         void tick(float delta) {
             tickInstances(delta);
             tickChunks(delta);
+            camera->tick(delta);
             if (state[SDL_SCANCODE_LEFT]) {
-                camera->x -= 64.0f;
+                camera->x -= 16.0f;
             }
             if (state[SDL_SCANCODE_RIGHT]) {
-                camera->x += 64.0f;
+                camera->x += 16.0f;
             }
             if (state[SDL_SCANCODE_UP]) {
-                camera->y -= 64.0f;
+                camera->y -= 16.0f;
             }
             if (state[SDL_SCANCODE_DOWN]) {
-                camera->y += 64.0f;
+                camera->y += 16.0f;
             }
         }
 

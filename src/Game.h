@@ -49,9 +49,9 @@ class Game {
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_TEXTURE_2D);
-
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        
+            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
             glLoadIdentity();    
 
@@ -135,8 +135,15 @@ class Game {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             glPushMatrix();
+            glTranslatef((WIDTH * SCALE)/2, (HEIGHT * SCALE)/2, 0.0f);
+            glScalef(scene->camera->zoom, scene->camera->zoom, 1.0f);
+            glTranslatef(-(WIDTH * SCALE)/2, -(HEIGHT * SCALE)/2, 0.0f);
             glTranslatef(-scene->camera->x, -scene->camera->y, 0.0f);
-            scene->draw(delta); 
+            scene->draw(delta);
+            glPopMatrix();
+            
+            glPushMatrix();
+            scene->camera->draw(delta);
             glPopMatrix();
         }
 
