@@ -7,11 +7,13 @@ using namespace std;
 class Entity: public Instance {
     public:
         float dx, dy;
+        float weight;
 
         Entity (float x, float y) : Instance(x, y) {
             this->dx = 0;
             this->dy = 0;
             this->type = "entity";
+            this->weight = 4.2f;
         }
 
         void updatePhysics (float delta) {
@@ -47,6 +49,8 @@ class Entity: public Instance {
             
             x += dx * delta;
             y += dy * delta;
+
+            dy += weight;
         }
         
         void addForce (float direction, float force) {

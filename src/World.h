@@ -1,6 +1,7 @@
 #include "types/BlockType.h"
 #include "Scene.h"
 #include "instance/Block.h"
+#include "instance/Player.h"
 #include "world/WorldMap.h"
 #include "world/Chunk.h"
 
