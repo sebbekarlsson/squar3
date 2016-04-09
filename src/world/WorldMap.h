@@ -56,7 +56,7 @@ class WorldMap {
                         //blocks[genx][max(0, geny-1)]->setType(&BLOCK_MUSHROOM);
                     }
                     if (rand() % 5 + 0 == 0) {
-                       /* int i = 0;
+                       int i = 0;
                         for (i = 0; i < 6; i++) {
                             if (geny - i <= 0) { break; }
                             blocks[genx][max(0, geny-i)]->setType(&BLOCK_LOG);
@@ -75,7 +75,7 @@ class WorldMap {
                         blocks[min(w, genx+1)][min(h, th+1)]->setType(&BLOCK_LEAF);
                         blocks[max(0, genx-1)][min(h, th+1)]->setType(&BLOCK_LEAF);
                         blocks[min(w, genx+2)][min(h, th+1)]->setType(&BLOCK_LEAF);
-                        blocks[max(0, genx-2)][min(h, th+1)]->setType(&BLOCK_LEAF);*/
+                        blocks[max(0, genx-2)][min(h, th+1)]->setType(&BLOCK_LEAF);
                     }
                 }
 
