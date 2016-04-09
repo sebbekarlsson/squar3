@@ -13,7 +13,7 @@ class Entity: public Instance {
             this->dx = 0;
             this->dy = 0;
             this->type = "entity";
-            this->weight = 4.2f;
+            this->weight = 6.2f;
         }
 
         void updatePhysics (float delta) {

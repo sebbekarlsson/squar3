@@ -18,7 +18,7 @@ class Instance {
             this->y = y;
             this->w = 0;
             this->h = 0;
-            this->friction = 0.01f;
+            this->friction = 1.0f;
             this->type = "instance";
         }
 

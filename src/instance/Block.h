@@ -1,6 +1,7 @@
 class Block : public Instance {
     public:
         BlockType * type;
+        int cdn;
 
         Block (float x, float y, BlockType * type) : Instance(x, y) {
             this->h = 16;

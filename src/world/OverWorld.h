@@ -1,4 +1,7 @@
 #include "../World.h"
+#include "../Entity.h"
+#include "../instance/Player.h"
+
 
 class OverWorld: public World {
     public:
@@ -26,6 +29,6 @@ class OverWorld: public World {
         }
 
         void initialize(float delta) {
-            instances.insert(instances.begin(), new Player(0.0f, 0.0f));
+            instances.insert(instances.begin(), new Player(0.0f, 0.0f, this));
         }
 };

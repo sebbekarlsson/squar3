@@ -9,7 +9,6 @@
 #include "Instance.h"
 #include "Camera.h"
 #include "Game.h"
-#include "Entity.h"
 #include "world/OverWorld.h"
 
 const Uint8 *keys;

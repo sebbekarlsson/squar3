@@ -1,43 +1,65 @@
 const Uint8 *state = SDL_GetKeyboardState(NULL);
 class Player: public Entity {
     public:
-        Player (float x, float y) : Entity (x, y) {
-            this->w = 16;
-            this->h = 32;
+        World * world;
+        bool on_ground;
+
+        Player (float x, float y, World * world) : Entity (x, y) {
+            this->w = 12;
+            this->h = 28;
             this->type = "player1";
+            this->world = world;
+            this->on_ground = false;
         }
 
         void tick (float delta) {
+            updatePhysics(delta);
+
             if (state[SDL_SCANCODE_LEFT]) {
                 dx -= 16.0f;
             }
             if (state[SDL_SCANCODE_RIGHT]) {
                 dx += 16.0f;
             }
-            if (state[SDL_SCANCODE_UP]) {
-                dy -= 16.0f;
+            if (state[SDL_SCANCODE_UP] && on_ground) {
+                addForce(270, ((16+weight)*weight));
             }
             if (state[SDL_SCANCODE_DOWN]) {
                 dy += 16.0f;
             }
+            if (state[SDL_SCANCODE_R]) {
+                world->generate();
+                x = 0;
+                y = 0;
+            }
+            
+            on_ground = false;
+            Chunk * chunk = world->chunks[(int)((int)(x+(dx*delta))%((16*16)*100))/(16*16)][(int)((int)(y+(dy*delta))%((16*16)*8))/(16*16)];
+            for (int xx = 0; xx < sizeof(chunk->blocks)/(sizeof(*chunk->blocks)); xx++) {
+                for (int yy = 0; yy < sizeof(chunk->blocks[xx])/sizeof(*chunk->blocks[xx]); yy++) {
+                    Block * block = chunk->blocks[xx][yy];
+                    if (block->type == &BLOCK_AIR) { continue; }
 
-            /* TODO
-             *
-             * Hmm... We need to have the World class / object
-             * (the current world that this player exists in) in scope.
-             *
-             * How would we achieve this?
-             * this is needed to be able to check for collisions.
-             * We currently cannot reach the current world object from here.
-             *
-             * something like:
-             *
-             *     getCurrentWorld().getCurrentChunk(this).getBlocks();
-             *
-             * would have been very nice.
-             */
-
-            updatePhysics(delta); 
+                    int inst_x = block->x;
+                    int inst_y = block->y;
+                    int inst_w = block->w;
+                    int inst_h = block->h;
+                    
+                    if ((y+h) + (dy * delta) >= inst_y && y+(dy * delta) <= inst_y+inst_h) {
+                        if ((x+w)+(dx * delta) >= inst_x && x+(dx * delta) <= inst_x+inst_w) {
+                            
+                            if (!(x+w+(dx*delta) < block->x && x+(dx*delta) > block->x+block->w)) {
+                                dy -= dy;
+                                on_ground = true;
+                            }
+                            
+                            if (!(y+h+(dy*delta) < block->y)) {
+                                dx -= dx;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         void draw (float delta) {
