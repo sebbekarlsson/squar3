@@ -56,8 +56,10 @@ class Entity: public Instance {
                                     on_ground = true;
                                 }
 
-                                if (!(y+h+(dy*delta) < block->y+0.1f)) {
+                                if (!(y+h+(dy*delta) < block->y+1.0f)) {
                                     dx -= dx;
+                                } else {
+                                    y = block->y-h;
                                 }
                             }
                         }
