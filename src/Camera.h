@@ -3,7 +3,7 @@ class Camera: public Instance {
         float zoom;
 
         Camera (float x, float y) : Instance(x, y) {
-            this->zoom = 4.0f;
+            this->zoom = 3.0f;
         }
 
         void tick(float delta) {

@@ -56,26 +56,26 @@ class WorldMap {
                         //blocks[genx][max(0, geny-1)]->setType(&BLOCK_MUSHROOM);
                     }
                     if (rand() % 5 + 0 == 0) {
-                       int i = 0;
-                        for (i = 0; i < 6; i++) {
-                            if (geny - i <= 0) { break; }
-                            blocks[genx][max(0, geny-i)]->setType(&BLOCK_LOG);
-                        }
+                        //int i = 0;
+                        //for (i = 0; i < 6; i++) {
+                        //    if (geny - i <= 0) { break; }
+                        //    blocks[genx][max(0, geny-i)]->setType(&BLOCK_LOG);
+                        //}
 
-                        int th = geny-i;
+                        //int th = geny-i;
 
-                        if (th < 0) { th = 0; }
-                        if (th > h) { th = h; }
+                        //if (th < 0) { th = 0; }
+                        //if (th > h) { th = h; }
 
-                        blocks[genx][min(h, th+1)]->setType(&BLOCK_LEAF);
-                        blocks[genx][min(h, th)]->setType(&BLOCK_LEAF);
-                        blocks[genx][max(0, th-1)]->setType(&BLOCK_LEAF);
-                        blocks[min(w, genx+1)][min(h, th)]->setType(&BLOCK_LEAF);
-                        blocks[max(0, genx-1)][min(h, th)]->setType(&BLOCK_LEAF);
-                        blocks[min(w, genx+1)][min(h, th+1)]->setType(&BLOCK_LEAF);
-                        blocks[max(0, genx-1)][min(h, th+1)]->setType(&BLOCK_LEAF);
-                        blocks[min(w, genx+2)][min(h, th+1)]->setType(&BLOCK_LEAF);
-                        blocks[max(0, genx-2)][min(h, th+1)]->setType(&BLOCK_LEAF);
+                        //blocks[genx][min(h, th+1)]->setType(&BLOCK_LEAF);
+                        //blocks[genx][min(h, th)]->setType(&BLOCK_LEAF);
+                        //blocks[genx][max(0, th-1)]->setType(&BLOCK_LEAF);
+                        //blocks[min(w, genx+1)][min(h, th)]->setType(&BLOCK_LEAF);
+                        //blocks[max(0, genx-1)][min(h, th)]->setType(&BLOCK_LEAF);
+                        //blocks[min(w, genx+1)][min(h, th+1)]->setType(&BLOCK_LEAF);
+                        //blocks[max(0, genx-1)][min(h, th+1)]->setType(&BLOCK_LEAF);
+                        //blocks[min(w, genx+2)][min(h, th+1)]->setType(&BLOCK_LEAF);
+                        //blocks[max(0, genx-2)][min(h, th+1)]->setType(&BLOCK_LEAF);
                     }
                 }
 
